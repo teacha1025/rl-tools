@@ -5,6 +5,16 @@
 
 RL_TOOLS_NAMESPACE_WRAPPER_START
 namespace rl_tools::utils::string{
+    template <typename T>
+    T abs(T value) {
+        return value < 0 ? -value : value;
+	}
+
+    template<>
+    size_t abs<size_t>(size_t value) {
+        return value;
+	}
+
     template <typename TI>
     TI length(const char* str, TI MAX_LEN) {
         TI len = 0;
@@ -142,7 +152,7 @@ namespace rl_tools::utils::string{
         while (working_value != 0 && temp_pos < 32) {
             // For negative numbers, modulo gives negative result, so take absolute of digit
             T digit = working_value % 10;
-            if (digit < 0) digit = -digit;
+            if (digit < 0) digit = abs(digit);
             temp[temp_pos++] = '0' + digit;
             working_value /= 10;
         }
