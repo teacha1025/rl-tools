@@ -325,7 +325,7 @@ namespace rl_tools{
         for (auto& step : steps){
             if(step.is_directory()){
                 if(std::filesystem::exists(step.path() / "checkpoint.h5")){
-                    current_path.step = step.path().filename();
+                    current_path.step = step.path().filename().string<char>();
                     current_path.checkpoint_path = step.path() / "checkpoint.h5";
                     p_query = current_path;
                     found = true;
